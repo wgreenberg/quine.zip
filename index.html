@@ -1,17 +1,26 @@
 <html>
+<head>
+<link rel="stylesheet" type="text/css" href="./styles/main.css">
 <script src="./interpreter.js"></script>
 <script>
 function setup() {
     var inbox = document.getElementById('input');
     var outbox = document.getElementById('output');
     inbox.addEventListener('input', function () {
-        var program = Interpreter.parse(inbox.value);
-        var output = Interpreter.run(program);
-        outbox.value = output;
+        try {
+            var program = Interpreter.parse(inbox.value);
+            var output = Interpreter.run(program);
+            outbox.disabled = false;
+            outbox.value = output;
+        } catch (e) {
+            outbox.disabled = true;
+            console.log(e);
+        }
     });
 }
 document.addEventListener('DOMContentLoaded', setup);
 </script>
-<textarea id="input"></textarea>
-<textarea id="output"></textarea>
+</head>
+<textarea id="input" class="codebox"></textarea>
+<textarea id="output" readonly class="codebox"></textarea>
 </html>
