@@ -5,8 +5,8 @@ function setup() {
     var inbox = document.getElementById('input');
     var outbox = document.getElementById('output');
     inbox.addEventListener('input', function () {
-        var program = parse(inbox.value);
-        var output = run(program);
+        var program = Interpreter.parse(inbox.value);
+        var output = Interpreter.run(program);
         outbox.value = output;
     });
 }

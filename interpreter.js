@@ -82,7 +82,18 @@ function run (program) {
     return outputLines.filter(nonempty).join('\n');
 }
 
-module.exports = {
+// main module object
+var Interpreter = {
     parse: parse,
     run: run,
 };
+
+// browser/nodejs compat
+if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+        exports = module.exports = Interpreter;
+    }
+    exports.Interpreter = Interpreter;
+} else {
+    window['Interpreter'] = Interpreter;
+}
