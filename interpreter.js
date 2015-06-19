@@ -1,7 +1,7 @@
 /**
  * Our grammar:
  * program -> [action]
- * action -> "repeat" int int | "print" int int
+ * action -> "repeat" nat nat | "print" nat nat
  */
 
 const REPEAT = 'repeat';
@@ -23,8 +23,8 @@ function parseLine (line, i) {
 
 function repeat (symbols) {
     var repeatT = symbols[0];
-    var a = parseInt(symbols[1]);
-    var b = parseInt(symbols[2]);
+    var a = parseNat(symbols[1]);
+    var b = parseNat(symbols[2]);
     if (repeatT === REPEAT && !isNaN(a) && !isNaN(b) && symbols.length === 3) {
         return {
             t: repeatT,
@@ -36,13 +36,20 @@ function repeat (symbols) {
 
 function print (symbols) {
     var printT = symbols[0];
-    var a = parseInt(symbols[1]);
+    var a = parseNat(symbols[1]);
     if (printT === PRINT && !isNaN(a) && symbols.length === 2) {
         return {
             t: printT,
             a: a,
         };
     }
+}
+
+function parseNat (str) {
+    if(/^[0-9]+$/.test(str)) {
+        return Number(str);
+    }
+    return NaN;
 }
 
 function stringify (instruction) {
@@ -71,7 +78,7 @@ function run (program) {
             outputLines = outputLines.concat(printLines.map(stringify));
             pc = end;
         } else if (instruction.t === REPEAT) {
-            var start = outputLines.length - instruction.b;
+            var start = Math.max(outputLines.length - instruction.b, 0);
             var end = start + instruction.a;
             for (var i = start; i < end; i++) {
                 outputLines.push(outputLines[i]);

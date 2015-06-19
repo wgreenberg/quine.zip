@@ -9,6 +9,9 @@ describe('parse', function () {
         var invalidPrograms = [
             'print zzz',
             'print 1 2',
+            'print 1fffweh091',
+            'print Infinity',
+            'print -1',
             'repeat 2\n3',
             'print 1 repeat 2 3',
             'print 1\nrepeat 2\nprint 2',
