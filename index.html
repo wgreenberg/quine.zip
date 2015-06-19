@@ -1,0 +1,17 @@
+<html>
+<script src="./interpreter.js"></script>
+<script>
+function setup() {
+    var inbox = document.getElementById('input');
+    var outbox = document.getElementById('output');
+    inbox.addEventListener('input', function () {
+        var program = parse(inbox.value);
+        var output = run(program);
+        outbox.value = output;
+    });
+}
+document.addEventListener('DOMContentLoaded', setup);
+</script>
+<textarea id="input"></textarea>
+<textarea id="output"></textarea>
+</html>
