@@ -9,7 +9,7 @@
 <p>Below are two textboxes. The one on the left is for input, and the one on
 the right displays output.</p>
 <p>The goal here is to write a series of <i>commands</i> on the left that
-result in the output on the right matching exactly what's on the left.</p>
+results in output matching exactly what's on the left.</p>
 <p>In the world of programming, such a series of commands is called a 
 <a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine</a></p>
 <p>The commands available to you are:
@@ -23,13 +23,17 @@ result in the output on the right matching exactly what's on the left.</p>
         </li>
     </ul>
 </p>
-<p>Only write one command per line!</p>
+<p>In both commands, <b>M</b> and <b>N</b> are natural numbers (e.g. 0, 1, 2,
+...)</p>
+<p>Yes, such a quine is possible, and no, I won't tell you what it is. Only one
+command per line, please.</p>
 </div>
 <div class="codeboxes">
     <textarea id="input" class="codebox"></textarea>
     <textarea id="output" readonly class="codebox"></textarea>
 </div>
 <h3>Examples:</h3>
+<div class="examples">
 <div class="example">
     <div class="example-input">
         Input:
@@ -71,4 +75,18 @@ result in the output on the right matching exactly what's on the left.</p>
         </div>
     </div>
 </div>
+</div>
+<h3>More info:</h3>
+<p>I found this exact puzzle a couple years ago, but have since been able to
+find it again. I thought it was interesting enough to merit a couple hours of
+hacking to recreate, and so here we are!</p>
+<p>For those interested in learning more about this quine, here are a couple
+blog posts on the topic:
+    <ul>
+        <li><a href="http://steike.com/code/useless/zip-file-quine/">ZIP File Quine</a></li>
+        <li><a href="http://research.swtch.com/zip">Zip Files All The Way Down</a></li>
+    </ul>
+</p>
+<p>The source for this page is on Github at
+<a href="http://github.com/wgreenberg/quine.zip">wgreenberg/quine.zip</a>.</p>
 </html>

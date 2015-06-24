@@ -15,11 +15,14 @@ body {
     width: 500px;
 }
 
+.examples {
+    display: table-cell;
+}
+
 .example {
     background-color: #eee8d5;
     display: inline-block;
-    margin: 10px;
-    float: left;
+    height: 100%;
 }
 
 .example-output {
