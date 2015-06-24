@@ -32,6 +32,8 @@ describe('parse', function () {
             'print 1 ',
             'repeat 2 3\nprint 2',
             'print 1\nprint 1\nprint 1\nrepeat 3 2\nprint 1',
+            'repeat 2 3\nprint 2\n',
+            'repeat 2 3\nprint 2\n\n\n',
         ];
         validPrograms.forEach(function (program) {
             expect(function () {

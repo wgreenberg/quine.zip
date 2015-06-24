@@ -8,7 +8,7 @@ const REPEAT = 'repeat';
 const PRINT = 'print';
 
 function parse (input) {
-    var lines = input.split(/[\n]/);
+    var lines = input.split(/[\n]/).filter(nonempty);
     return lines.map(parseLine);
 }
 
