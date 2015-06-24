@@ -4,6 +4,70 @@
 <script src="./interpreter.js"></script>
 <script src="./main.js"></script>
 </head>
-<textarea id="input" class="codebox"></textarea>
-<textarea id="output" readonly class="codebox"></textarea>
+<h1>Quine.zip</h1>
+<div class='explanation'>
+<p>Below are two textboxes. The one on the left is for input, and the one on
+the right is for output.</p>
+<p>The goal here is to write a series of <i>commands</i> on the left that
+result in the output on the right matching exactly what's on the left.</p>
+<p>In the world of programming, such a series of commands is called a 
+<a href='https://en.wikipedia.org/wiki/Quine_(computing)'>quine</a></p>
+<p>The commands available to you are:
+    <ul>
+        <li>
+            <b>print M</b>: prints the following M lines of input
+        </li>
+        <li>
+            <b>repeat M N</b>: repeats the last M lines of output, starting N
+            lines from the end
+        </li>
+    </ul>
+</p>
+</div>
+<div class='codeboxes'>
+    <textarea id="input" class="codebox"></textarea>
+    <textarea id="output" readonly class="codebox"></textarea>
+</div>
+<h3>Examples:</h3>
+<div class='example'>
+    <div class='example-input'>
+        Input:
+        <div class='example-code'>
+            <span class='line'>print 2</span>
+            <span class='line'>print 3</span>
+            <span class='line'>print 4</span>
+            <span class='line'>repeat 1 1</span>
+        </div>
+    </div>
+    <div class='example-output'>
+        Output:
+        <div class='example-code'>
+            <span class='line'>print 3</span>
+            <span class='line'>print 4</span>
+            <span class='line'>print 4</span>
+        </div>
+    </div>
+</div>
+<div class='example'>
+    <div class='example-input'>
+        Input:
+        <div class='example-code'>
+            <span class='line'>print 0</span>
+            <span class='line'>print 2</span>
+            <span class='line'>print 1</span>
+            <span class='line'>print 1</span>
+            <span class='line'>repeat 3 2</span>
+        </div>
+    </div>
+    <div class='example-output'>
+        Output:
+        <div class='example-code'>
+            <span class='line'>print 1</span>
+            <span class='line'>print 1</span>
+            <span class='line'>print 1</span>
+            <span class='line'>print 1</span>
+            <span class='line'>print 1</span>
+        </div>
+    </div>
+</div>
 </html>
