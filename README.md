@@ -20,7 +20,7 @@ As it turns out, these two primitives make up the LZ77 decompression algorithm
 used to unpack ZIP files, and so if you can make a quine out of these, you can
 theoretically write a ZIP file that unzips to itself. Cool beans!
 
-Further reading (spoiler alert attempting quine puzzle):
+Further reading (spoiler alert for those attempting the quine puzzle):
 
 * http://steike.com/code/useless/zip-file-quine/
 * http://research.swtch.com/zip
