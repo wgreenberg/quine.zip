@@ -7,7 +7,7 @@
 <h1>Quine.zip</h1>
 <div class='explanation'>
 <p>Below are two textboxes. The one on the left is for input, and the one on
-the right is for output.</p>
+the right displays output.</p>
 <p>The goal here is to write a series of <i>commands</i> on the left that
 result in the output on the right matching exactly what's on the left.</p>
 <p>In the world of programming, such a series of commands is called a 
@@ -15,7 +15,7 @@ result in the output on the right matching exactly what's on the left.</p>
 <p>The commands available to you are:
     <ul>
         <li>
-            <b>print M</b>: prints the following M lines of input
+            <b>print M</b>: prints the following M lines of input (they are ignored)
         </li>
         <li>
             <b>repeat M N</b>: repeats the last M lines of output, starting N
@@ -23,6 +23,7 @@ result in the output on the right matching exactly what's on the left.</p>
         </li>
     </ul>
 </p>
+<p>Only write one command per line!</p>
 </div>
 <div class='codeboxes'>
     <textarea id="input" class="codebox"></textarea>
@@ -55,7 +56,7 @@ result in the output on the right matching exactly what's on the left.</p>
             <span class='line'>print 0</span>
             <span class='line'>print 2</span>
             <span class='line'>print 1</span>
-            <span class='line'>print 1</span>
+            <span class='line'>print 2</span>
             <span class='line'>repeat 3 2</span>
         </div>
     </div>
@@ -63,9 +64,9 @@ result in the output on the right matching exactly what's on the left.</p>
         Output:
         <div class='example-code'>
             <span class='line'>print 1</span>
+            <span class='line'>print 2</span>
             <span class='line'>print 1</span>
-            <span class='line'>print 1</span>
-            <span class='line'>print 1</span>
+            <span class='line'>print 2</span>
             <span class='line'>print 1</span>
         </div>
     </div>

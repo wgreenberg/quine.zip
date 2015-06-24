@@ -5,14 +5,13 @@ body {
 
 .codebox {
     width: 45%;
-    height: 500;
+    height: 300;
     margin-left: auto;
     margin-right: auto;
 }
 
 .codeboxes {
     display: block;
-    margin-left: 40px;
     width: 500px;
 }
 
@@ -35,6 +34,7 @@ body {
 
 .example-code {
     padding: 5px;
+    font-family: "Courier New";
     border-style: solid;
     border-width: 1px;
 }
