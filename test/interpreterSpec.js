@@ -1,6 +1,6 @@
 var Chai = require('chai');
 
-var Interpreter = require('../interpreter');
+var Interpreter = require('../src/interpreter');
 
 var expect = Chai.expect;
 
