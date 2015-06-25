@@ -14,6 +14,10 @@ a.visited {
     color: #586e75;
 }
 
+p {
+    width: 700px;
+}
+
 body {
     color: #657b83;
     background-color: #fdf6e3;
