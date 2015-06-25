@@ -67,26 +67,25 @@ function nonempty (str) {
 }
 
 function run (program) {
-    var outputLines = [];
-    var pc = 0;
-    while (pc < program.length) {
-        var instruction = program[pc];
-        if (instruction.t === PRINT) {
-            var start = pc + 1;
-            var end = start + instruction.a;
-            var printLines = program.slice(start, end);
-            outputLines = outputLines.concat(printLines.map(stringify));
-            pc = end;
-        } else if (instruction.t === REPEAT) {
-            var start = Math.max(outputLines.length - instruction.b, 0);
-            var end = start + instruction.a;
-            for (var i = start; i < end; i++) {
-                outputLines.push(outputLines[i]);
-            }
-            pc++;
+    return runHelper(program, []);
+}
+
+function runHelper (program, outputLines) {
+    if (program.length === 0) {
+        return outputLines.filter(nonempty).join('\n');
+    }
+    var instruction = program.shift();
+    if (instruction.t === PRINT) {
+        var printLines = program.splice(0, instruction.a).map(stringify);
+        return runHelper(program, outputLines.concat(printLines));
+    } else if (instruction.t === REPEAT) {
+        var start = Math.max(outputLines.length - instruction.b, 0);
+        var end = start + instruction.a;
+        for (var i = start; i < end; i++) {
+            outputLines.push(outputLines[i]);
         }
-    };
-    return outputLines.filter(nonempty).join('\n');
+        return runHelper(program, outputLines);
+    }
 }
 
 // main module object
