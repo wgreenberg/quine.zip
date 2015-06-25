@@ -2,8 +2,20 @@
  * scheme by Ethan Schoonover: http://ethanschoonover.com/solarized
  */
 
+a, h1, h3 {
+    color: #b58900;
+}
+
+b {
+    color: #657b83;
+}
+
+a.visited {
+    color: #586e75;
+}
+
 body {
-    font-color: #657b83;
+    color: #657b83;
     background-color: #fdf6e3;
 }
 
