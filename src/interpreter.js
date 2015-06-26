@@ -79,10 +79,12 @@ function runHelper (program, outputLines) {
         var printLines = program.splice(0, instruction.a).map(stringify);
         return runHelper(program, outputLines.concat(printLines));
     } else if (instruction.t === REPEAT) {
-        var start = Math.max(outputLines.length - instruction.b, 0);
-        var end = start + instruction.a;
-        for (var i = start; i < end; i++) {
-            outputLines.push(outputLines[i]);
+        if (outputLines.length > 0) {
+            var start = Math.max(outputLines.length - instruction.b, 0);
+            var end = start + instruction.a;
+            for (var i = start; i < end; i++) {
+                outputLines.push(outputLines[i]);
+            }
         }
         return runHelper(program, outputLines);
     }

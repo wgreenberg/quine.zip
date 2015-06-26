@@ -145,4 +145,14 @@ describe('run', function () {
             'repeat 2 2',
         ]);
     });
+
+    it('should handle repeat statements at the top', function () {
+        expectOutput([
+            'repeat 1 1',
+            'print 1',
+            'print 1',
+        ], [
+            'print 1',
+        ]);
+    });
 });
