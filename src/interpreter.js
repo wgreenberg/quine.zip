@@ -6,22 +6,19 @@
 
 const REPEAT = 'repeat';
 const PRINT = 'print';
-
-function parse (input) {
-    var lines = input.split(/[\n]/).filter(nonempty);
-    return lines.map(parseLine);
-}
-
-function parseLine (line, i) {
-    var symbols = line.split(' ').filter(nonempty);
-    if (token = repeat(symbols))
-        return token;
-    if (token = print(symbols))
-        return token;
-    throw new Error('Invalid line: ' + i);
-}
-
-function repeat (symbols) {
+const REVERSE = 'reverse';
+const parsers = {};
+parsers[PRINT] = function (symbols) {
+    var printT = symbols[0];
+    var a = parseNat(symbols[1]);
+    if (printT === PRINT && !isNaN(a) && symbols.length === 2) {
+        return {
+            t: printT,
+            a: a,
+        };
+    }
+};
+parsers[REPEAT] = function (symbols) {
     var repeatT = symbols[0];
     var a = parseNat(symbols[1]);
     var b = parseNat(symbols[2]);
@@ -32,16 +29,34 @@ function repeat (symbols) {
             b: b,
         };
     }
+};
+parsers[REVERSE] = function (symbols) {
+    var reverseT = symbols[0];
+    if (reverseT === REVERSE && symbols.length === 1) {
+        return {
+            t: reverseT,
+        };
+    }
 }
 
-function print (symbols) {
-    var printT = symbols[0];
-    var a = parseNat(symbols[1]);
-    if (printT === PRINT && !isNaN(a) && symbols.length === 2) {
-        return {
-            t: printT,
-            a: a,
-        };
+function parse (input, instructionSet) {
+    var lines = input.split(/[\n]/).filter(nonempty);
+    var parseLine = getParser(instructionSet);
+    return lines.map(parseLine);
+}
+
+function getParser (instructionSet) {
+    return function (line, i) {
+        var symbols = line.split(' ').filter(nonempty);
+        var token;
+        var success = instructionSet.some(function (instruction) {
+            var instructionParser = parsers[instruction];
+            if (token = instructionParser(symbols))
+                return true;
+        });
+        if (!success)
+            throw new Error('Invalid line: ' + i);
+        return token;
     }
 }
 
@@ -87,6 +102,8 @@ function runHelper (program, outputLines) {
             }
         }
         return runHelper(program, outputLines);
+    } else if (instruction.t === REVERSE) {
+        return runHelper(program, outputLines.reverse());
     }
 }
 
@@ -94,6 +111,9 @@ function runHelper (program, outputLines) {
 var Interpreter = {
     parse: parse,
     run: run,
+    PRINT: PRINT,
+    REPEAT: REPEAT,
+    REVERSE: REVERSE,
 };
 
 // browser/nodejs compat
