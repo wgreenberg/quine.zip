@@ -1,0 +1,64 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./styles/main.css">
+<script src="./src/interpreter.js"></script>
+<script src="./src/reversi.js"></script>
+</head>
+<h1>Reversi</h1>
+<div class="explanation">
+<p>Below are two textboxes. The one on the left is for <i>input</i>, and the
+one on the right displays <i>output</i>.</p>
+<p>The goal here is to write a series of <i>commands</i> on the left that
+results in output matching exactly what's on the left.</p>
+<p>In the world of programming, such a series of commands is called a 
+<a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine</a></p>
+<p>The commands available to you are:
+    <ul>
+        <li>
+            <b>print M</b>: prints the following <b>M</b> lines of
+            <i>input</i>. Any command that is printed will not be run as an
+            action.
+        </li>
+        <li>
+            <b>reverse</b>: reverses the order of the <i>output</i>
+        </li>
+    </ul>
+</p>
+<p>In <b>print</b>, <b>M</b> and <b>N</b> are natural numbers (e.g. 0, 1, 2,
+...)</p>
+<p>Yes, such a quine is possible, and no, I won't tell you what it is. Only one
+command per line, please.</p>
+</div>
+<div class="codeboxes">
+    <textarea id="input" class="codebox"></textarea>
+    <textarea id="output" readonly class="codebox"></textarea>
+</div>
+<h3>Examples:</h3>
+<div class="examples">
+<div class="example">
+    <div class="example-input">
+        Input:
+        <div class="example-code">
+            <span class="line">print 3</span>
+            <span class="line">print 1</span>
+            <span class="line">print 2</span>
+            <span class="line">print 3</span>
+            <span class="line">reverse</span>
+        </div>
+    </div>
+    <div class="example-output">
+        Output:
+        <div class="example-code">
+            <span class="line">print 3</span>
+            <span class="line">print 2</span>
+            <span class="line">print 1</span>
+        </div>
+    </div>
+</div>
+</div>
+<p>The source for this page is on Github at
+<a href="http://github.com/wgreenberg/quine.zip">wgreenberg/quine.zip</a>.</p>
+<p>The colorscheme for this page is based on Ethan Schoonover's awesome
+<a href="http://ethanschoonover.com/solarized">Solarized</a> palette which is
+licensed under the <a href="https://github.com/altercation/solarized/blob/master/LICENSE">MIT License</a>.</p>
+</html>
