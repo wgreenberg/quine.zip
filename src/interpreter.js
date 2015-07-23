@@ -55,7 +55,7 @@ function getParser (instructionSet) {
                 return true;
         });
         if (!success)
-            throw new Error('Invalid line: ' + i);
+            throw new Error('Invalid line: ' + (i+1));
         return token;
     }
 }
