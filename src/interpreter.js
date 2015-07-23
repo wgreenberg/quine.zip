@@ -68,10 +68,8 @@ function parseWhole (str) {
 }
 
 function parseNat (str) {
-    if(/^[0-9]+$/.test(str) && Number(str) !== 0) {
-        return Number(str);
-    }
-    return NaN;
+    var whole = parseWhole(str);
+    return whole === 0 ? NaN : whole;
 }
 
 function stringify (instruction) {
