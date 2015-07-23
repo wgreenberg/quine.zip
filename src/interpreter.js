@@ -10,7 +10,7 @@ const REVERSE = 'reverse';
 const parsers = {};
 parsers[PRINT] = function (symbols) {
     var printT = symbols[0];
-    var a = parseNat(symbols[1]);
+    var a = parseWhole(symbols[1]);
     if (printT === PRINT && !isNaN(a) && symbols.length === 2) {
         return {
             t: printT,
@@ -20,7 +20,7 @@ parsers[PRINT] = function (symbols) {
 };
 parsers[REPEAT] = function (symbols) {
     var repeatT = symbols[0];
-    var a = parseNat(symbols[1]);
+    var a = parseWhole(symbols[1]);
     var b = parseNat(symbols[2]);
     if (repeatT === REPEAT && !isNaN(a) && !isNaN(b) && symbols.length === 3) {
         return {
@@ -60,8 +60,15 @@ function getParser (instructionSet) {
     }
 }
 
-function parseNat (str) {
+function parseWhole (str) {
     if(/^[0-9]+$/.test(str)) {
+        return Number(str);
+    }
+    return NaN;
+}
+
+function parseNat (str) {
+    if(/^[0-9]+$/.test(str) && Number(str) !== 0) {
         return Number(str);
     }
     return NaN;
