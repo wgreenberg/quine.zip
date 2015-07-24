@@ -27,6 +27,19 @@ describe('LZ77', function () {
                 }).to.throw();
             });
         });
+        
+        it('should error when N is not a natural number', function () {
+            var invalidPrograms = [
+                'print 1\nprint 1\nrepeat 1 0',
+                'print 2\nprint 1\nprint 1\nrepeat 3 0',
+                'print 1\nprint 3\nrepeat 2 0\nprint 2'
+            ];
+            invalidPrograms.forEach(function (program) {
+                expect(function () {
+                    Interpreter.parse(program, lz77ISA);
+                }).to.throw();
+            });
+        });
 
         it('should not throw on valid programs', function () {
             var validPrograms = [

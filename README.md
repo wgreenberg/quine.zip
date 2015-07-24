@@ -8,9 +8,9 @@ since forgotten where to find the puzzle, so I rewrote it myself.
 
 The language mentioned above is composed of two primitives:
 
-* `print N`: print the following `N` lines of input verbatim (and don't
+* `print M`: print the following `M` lines of input verbatim (and don't
   interpret them)
-* `repeat N M`: print the last `N` lines of output verbatim, starting `M` lines
+* `repeat M N`: print the last `M` lines of output verbatim, starting `N` lines
   before the end of output.
 
 If you wanna try out the puzzle, it's hosted on 
