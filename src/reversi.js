@@ -1,11 +1,11 @@
-var reversiISA = [Interpreter.PRINT, Interpreter.REVERSE];
+const reversiISA = [Interpreter.PRINT, Interpreter.REVERSE];
 function setup() {
-    var inbox = document.getElementById('input');
-    var outbox = document.getElementById('output');
-    inbox.addEventListener('input', function () {
+    const inbox = document.getElementById('input');
+    const outbox = document.getElementById('output');
+    inbox.addEventListener('input', () => {
         try {
-            var program = Interpreter.parse(inbox.value, reversiISA);
-            var output = Interpreter.run(program);
+            const program = Interpreter.parse(inbox.value, reversiISA);
+            const output = Interpreter.run(program);
             outbox.disabled = false;
             outbox.value = output;
         } catch (e) {

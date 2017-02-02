@@ -8,9 +8,9 @@ const REPEAT = 'repeat';
 const PRINT = 'print';
 const REVERSE = 'reverse';
 const parsers = {};
-parsers[PRINT] = function (symbols) {
-    var printT = symbols[0];
-    var a = parseWhole(symbols[1]);
+parsers[PRINT] = (symbols) => {
+    const printT = symbols[0];
+    const a = parseWhole(symbols[1]);
     if (printT === PRINT && !isNaN(a) && symbols.length === 2) {
         return {
             t: printT,
@@ -18,10 +18,10 @@ parsers[PRINT] = function (symbols) {
         };
     }
 };
-parsers[REPEAT] = function (symbols) {
-    var repeatT = symbols[0];
-    var a = parseWhole(symbols[1]);
-    var b = parseNat(symbols[2]);
+parsers[REPEAT] = (symbols) => {
+    const repeatT = symbols[0];
+    const a = parseWhole(symbols[1]);
+    const b = parseNat(symbols[2]);
     if (repeatT === REPEAT && !isNaN(a) && !isNaN(b) && symbols.length === 3) {
         return {
             t: repeatT,
@@ -30,8 +30,8 @@ parsers[REPEAT] = function (symbols) {
         };
     }
 };
-parsers[REVERSE] = function (symbols) {
-    var reverseT = symbols[0];
+parsers[REVERSE] = (symbols) => {
+    const reverseT = symbols[0];
     if (reverseT === REVERSE && symbols.length === 1) {
         return {
             t: reverseT,
@@ -40,22 +40,23 @@ parsers[REVERSE] = function (symbols) {
 }
 
 function parse (input, instructionSet) {
-    var lines = input.split(/[\n]/).filter(nonempty);
-    var parseLine = getParser(instructionSet);
+    const lines = input.split(/[\n]/).filter(nonempty);
+    const parseLine = getParser(instructionSet);
     return lines.map(parseLine);
 }
 
 function getParser (instructionSet) {
-    return function (line, i) {
-        var symbols = line.split(' ').filter(nonempty);
-        var token;
-        var success = instructionSet.some(function (instruction) {
-            var instructionParser = parsers[instruction];
+    return (line, i) => {
+        const symbols = line.split(' ').filter(nonempty);
+
+        let token;
+        const success = instructionSet.some((instruction) => {
+            const instructionParser = parsers[instruction];
             if (token = instructionParser(symbols))
                 return true;
         });
         if (!success)
-            throw new Error('Invalid line: ' + (i+1));
+            throw new Error(`Invalid line: ${i+1}`);
         return token;
     }
 }
@@ -68,13 +69,13 @@ function parseWhole (str) {
 }
 
 function parseNat (str) {
-    var whole = parseWhole(str);
+    const whole = parseWhole(str);
     return whole === 0 ? NaN : whole;
 }
 
 function stringify (instruction) {
     if (instruction) {
-        return Object.keys(instruction).map(function (k) {
+        return Object.keys(instruction).map((k) => {
             return instruction[k];
         }).join(' ');
     } else {
@@ -94,15 +95,15 @@ function runHelper (program, outputLines) {
     if (program.length === 0) {
         return outputLines.filter(nonempty).join('\n');
     }
-    var instruction = program.shift();
+    const instruction = program.shift();
     if (instruction.t === PRINT) {
-        var printLines = program.splice(0, instruction.a).map(stringify);
+        const printLines = program.splice(0, instruction.a).map(stringify);
         return runHelper(program, outputLines.concat(printLines));
     } else if (instruction.t === REPEAT) {
         if (outputLines.length > 0) {
-            var start = Math.max(outputLines.length - instruction.b, 0);
-            var end = start + instruction.a;
-            for (var i = start; i < end; i++) {
+            const start = Math.max(outputLines.length - instruction.b, 0);
+            const end = start + instruction.a;
+            for (let i = start; i < end; i++) {
                 outputLines.push(outputLines[i]);
             }
         }
@@ -113,7 +114,7 @@ function runHelper (program, outputLines) {
 }
 
 // main module object
-var Interpreter = {
+const Interpreter = {
     parse: parse,
     run: run,
     PRINT: PRINT,

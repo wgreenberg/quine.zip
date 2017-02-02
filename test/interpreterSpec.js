@@ -1,14 +1,14 @@
-var Chai = require('chai');
+const Chai = require('chai');
 
-var Interpreter = require('../src/interpreter');
+const Interpreter = require('../src/interpreter');
 
-var expect = Chai.expect;
+const expect = Chai.expect;
 
-describe('LZ77', function () {
-    var lz77ISA = [Interpreter.PRINT, Interpreter.REPEAT];
-    describe('parse', function () {
-        it('should error on incorrect programs', function () {
-            var invalidPrograms = [
+describe('LZ77', () => {
+    const lz77ISA = [Interpreter.PRINT, Interpreter.REPEAT];
+    describe('parse', () => {
+        it('should error on incorrect programs', () => {
+            const invalidPrograms = [
                 'print zzz',
                 'print 1 2',
                 'print 1fffweh091',
@@ -21,28 +21,28 @@ describe('LZ77', function () {
                 'repeat repeat print print',
                 'print',
             ];
-            invalidPrograms.forEach(function (program) {
-                expect(function () {
-                    Interpreter.parse(program, lz77ISA);
-                }).to.throw();
-            });
-        });
-        
-        it('should error when N is not a natural number', function () {
-            var invalidPrograms = [
-                'print 1\nprint 1\nrepeat 1 0',
-                'print 2\nprint 1\nprint 1\nrepeat 3 0',
-                'print 1\nprint 3\nrepeat 2 0\nprint 2'
-            ];
-            invalidPrograms.forEach(function (program) {
-                expect(function () {
+            invalidPrograms.forEach((program) => {
+                expect(() => {
                     Interpreter.parse(program, lz77ISA);
                 }).to.throw();
             });
         });
 
-        it('should not throw on valid programs', function () {
-            var validPrograms = [
+        it('should error when N is not a natural number', () => {
+            const invalidPrograms = [
+                'print 1\nprint 1\nrepeat 1 0',
+                'print 2\nprint 1\nprint 1\nrepeat 3 0',
+                'print 1\nprint 3\nrepeat 2 0\nprint 2'
+            ];
+            invalidPrograms.forEach((program) => {
+                expect(() => {
+                    Interpreter.parse(program, lz77ISA);
+                }).to.throw();
+            });
+        });
+
+        it('should not throw on valid programs', () => {
+            const validPrograms = [
                 'print 1',
                 'print 1 ',
                 'repeat 2 3\nprint 2',
@@ -50,15 +50,15 @@ describe('LZ77', function () {
                 'repeat 2 3\nprint 2\n',
                 'repeat 2 3\nprint 2\n\n\n',
             ];
-            validPrograms.forEach(function (program) {
-                expect(function () {
+            validPrograms.forEach((program) => {
+                expect(() => {
                     Interpreter.parse(program, lz77ISA);
                 }).not.to.throw();
             });
         });
 
-        it('should return a token array for valid programs', function () {
-            var program = [
+        it('should return a token array for valid programs', () => {
+            const program = [
                 'print 1',
                 'repeat 2 3',
                 'print 4',
@@ -73,14 +73,14 @@ describe('LZ77', function () {
         });
     });
 
-    describe('run', function () {
+    describe('run', () => {
         function expectOutput (inputLines, outputLines) {
-            var program = Interpreter.parse(inputLines.join('\n'), lz77ISA);
-            var result = Interpreter.run(program);
+            const program = Interpreter.parse(inputLines.join('\n'), lz77ISA);
+            const result = Interpreter.run(program);
             expect(result).to.equal(outputLines.join('\n'));
         }
 
-        it('should simulate simple prints', function () {
+        it('should simulate simple prints', () => {
             expectOutput([
                 'print 1',
                 'print 2',
@@ -96,7 +96,7 @@ describe('LZ77', function () {
             ]);
         });
 
-        it('should simulate more complicated prints', function () {
+        it('should simulate more complicated prints', () => {
             expectOutput([
                 'print 1',
                 'print 2',
@@ -106,7 +106,7 @@ describe('LZ77', function () {
             ]);
         });
 
-        it('should simulate even more complicated prints', function () {
+        it('should simulate even more complicated prints', () => {
             expectOutput([
                 'print 3',
                 'print 2',
@@ -119,7 +119,7 @@ describe('LZ77', function () {
             ]);
         });
 
-        it('should simulate simple repeats', function () {
+        it('should simulate simple repeats', () => {
             expectOutput([
                 'print 1',
                 'print 1',
@@ -161,7 +161,7 @@ describe('LZ77', function () {
             ]);
         });
 
-        it('should handle repeat statements at the top', function () {
+        it('should handle repeat statements at the top', () => {
             expectOutput([
                 'repeat 1 1',
                 'print 1',
@@ -173,11 +173,11 @@ describe('LZ77', function () {
     });
 });
 
-describe('Reversi', function () {
-    var reversiISA = [Interpreter.PRINT, Interpreter.REVERSE];
-    describe('parse', function () {
-        it('should error on incorrect programs', function () {
-            var invalidPrograms = [
+describe('Reversi', () => {
+    const reversiISA = [Interpreter.PRINT, Interpreter.REVERSE];
+    describe('parse', () => {
+        it('should error on incorrect programs', () => {
+            const invalidPrograms = [
                 'print zzz',
                 'print 1 2',
                 'repeat 1 2',
@@ -186,15 +186,15 @@ describe('Reversi', function () {
                 'print Infinity',
                 'print -1',
             ];
-            invalidPrograms.forEach(function (program) {
-                expect(function () {
+            invalidPrograms.forEach((program) => {
+                expect(() => {
                     Interpreter.parse(program, reversiISA);
                 }).to.throw();
             });
         });
 
-        it('should not throw on valid programs', function () {
-            var validPrograms = [
+        it('should not throw on valid programs', () => {
+            const validPrograms = [
                 'reverse',
                 'print 1',
                 'print 1 ',
@@ -203,22 +203,22 @@ describe('Reversi', function () {
                 'reverse\nprint 2\n',
                 'reverse\nprint 2\n\n\n',
             ];
-            validPrograms.forEach(function (program) {
-                expect(function () {
+            validPrograms.forEach((program) => {
+                expect(() => {
                     Interpreter.parse(program, reversiISA);
                 }).not.to.throw();
             });
         });
     });
 
-    describe('run', function () {
+    describe('run', () => {
         function expectOutput (inputLines, outputLines) {
-            var program = Interpreter.parse(inputLines.join('\n'), reversiISA);
-            var result = Interpreter.run(program);
+            const program = Interpreter.parse(inputLines.join('\n'), reversiISA);
+            const result = Interpreter.run(program);
             expect(result).to.equal(outputLines.join('\n'));
         }
 
-        it('should simulate simple prints', function () {
+        it('should simulate simple prints', () => {
             expectOutput([
                 'print 3',
                 'print 1',
