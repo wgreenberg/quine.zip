@@ -1,6 +1,8 @@
 quine.zip
 =========
 
+[Try the puzzle here!](http://wgreenberg.github.io/quine.zip)
+
 A while ago, I found a website with a simple but devilishly difficult puzzle:
 given a minimal "programming" language, write a
 [quine](https://en.wikipedia.org/wiki/Quine_(computing)).  Unfortunately I've
@@ -12,9 +14,6 @@ The language mentioned above is composed of two primitives:
   interpret them)
 * `repeat M N`: print the last `M` lines of output verbatim, starting `N` lines
   before the end of output.
-
-If you wanna try out the puzzle, it's hosted on 
-[this repo's Github Page](http://wgreenberg.github.io/quine.zip)
 
 As it turns out, these two primitives make up the LZ77 decompression algorithm
 used to unpack ZIP files, and so if you can make a quine out of these, you can
